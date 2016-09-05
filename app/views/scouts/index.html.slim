@@ -8,11 +8,23 @@ table.table
 			th ID
 			th Last Name
 			th First Name
+			th Level
 			th Start Date
+			th Edit
+			th Delete
 	tbody
-		- @scouts.order('last_name', 'first_name').each do |scout|
+		- @scouts.order('scout_level', 'last_name', 'first_name').each do |scout|
 			tr.scout-info
 				td=scout.id
 				td=scout.last_name
 				td=scout.first_name
+				td="#{ScoutLevel.find(scout.scout_level).name}" if scout.scout_level
 				td=scout.start_date
+				td
+					= link_to edit_scout_path(scout) do
+						i.fa.fa-edit
+						span.sr-only Edit
+				td
+					= link_to scout_path(scout), method: :delete, data: { confirm: "Are you sure you wish to delete #{scout.first_name} #{scout.last_name}?"} do
+						i.fa.fa-times
+						span.sr-only Delete

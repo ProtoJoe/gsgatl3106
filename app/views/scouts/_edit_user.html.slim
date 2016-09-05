@@ -1,0 +1,9 @@
+= simple_form_for [@scout] do |f|
+	= f.input :last_name
+	= f.input :first_name
+	= f.input :scout_level, as: :select,
+					collection: ScoutLevel.all,
+					selected: @scout.scout_level,
+					prompt: 'Select a Level'
+	= f.input :start_date
+	= f.submit 'Save'
