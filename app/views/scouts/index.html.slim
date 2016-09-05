@@ -1,0 +1,18 @@
+h1 Scouts
+
+=link_to 'Add a Scout', new_scout_path
+
+table.table
+	thead
+		tr
+			th ID
+			th Last Name
+			th First Name
+			th Start Date
+	tbody
+		- @scouts.order('last_name', 'first_name').each do |scout|
+			tr.scout-info
+				td=scout.id
+				td=scout.last_name
+				td=scout.first_name
+				td=scout.start_date
